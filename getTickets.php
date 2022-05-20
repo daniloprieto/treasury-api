@@ -14,15 +14,17 @@ $searchTickets="
 SELECT 
  T.id, 
  T.name, 
- T.lastName, 
- T.tithe, 
- T.offering, 
+ T.lastName,
+ T.amount,
+ T.type,
+ T.digital,
+ T.description,
  T.status, 
  T.createdAt, 
  T.updatedAt, 
  H.name as headquarter,  
- H.country as country, 
- CONCAT(U.name,' ',U.lastName) as treasurer 
+ H.country as country,
+ U.lastName as treasurer 
 FROM tickets T
 LEFT JOIN headquarters H 
 ON T.headquarter = H.Id
@@ -38,8 +40,9 @@ while ($ticket = mysqli_fetch_array($tickets))
       "id"=>$ticket["id"],
       "name"=>$ticket["name"], 
       "lastName"=>$ticket["lastName"],
-      "tithe"=>$ticket["tithe"], 
-      "offering"=>$ticket["offering"], 
+      "amount"=>$ticket["amount"], 
+      "type"=>$ticket["type"],
+      "digital"=>$ticket["digital"], 
       "status"=>$ticket["status"], 
       "createdAt"=>$ticket["createdAt"],
       "updatedAt"=>$ticket["updatedAt"],   
