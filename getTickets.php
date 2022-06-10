@@ -29,7 +29,7 @@ FROM tickets T
 LEFT JOIN headquarters H 
 ON T.headquarter = H.Id
 LEFT JOIN users U ON T.userId = U.Id
-WHERE T.createdAt >= DATE '$date'
+WHERE DATE(T.createdAt)='$date'
 ORDER BY id DESC";
 
 $tickets = mysqli_query($connect, $searchTickets);
@@ -46,7 +46,8 @@ while ($ticket = mysqli_fetch_array($tickets))
       "status"=>$ticket["status"], 
       "createdAt"=>$ticket["createdAt"],
       "updatedAt"=>$ticket["updatedAt"],   
-      "headquarter"=>$ticket["headquarter"],   
+      "headquarter"=>$ticket["headquarter"],
+      "description"=>$ticket["description"],   
       "country"=>$ticket["country"],
       "treasurer"=>$ticket["treasurer"]
      ];
