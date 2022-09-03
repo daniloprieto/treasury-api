@@ -9,7 +9,7 @@ $db = 'iglesia3_iglesiagilgal';
 
 //LOCAL
 $server = 'localhost';
-$username = 'c2220253_cash';
-$password = 'Gilgal2022';
-$db = 'c2220253_cash';
+$username = 'c2220253_cashDev';
+$password = 'navo29wiGO';
+$db = 'c2220253_cashDev';
 ?>

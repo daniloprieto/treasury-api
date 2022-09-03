@@ -8,6 +8,7 @@ $JSONData = file_get_contents("php://input");
 $dataObject = json_decode($JSONData);
 
 $date = isset($dataObject->date) ? mysqli_real_escape_string($connect, trim($dataObject->date)) : null;
+$headquarter = isset($dataObject->headquarter) ? mysqli_real_escape_string($connect, trim($dataObject->headquarter)) : null;
 
 //$searchTickets="SELECT * FROM tickets WHERE date='$date'";
 $searchTickets="
@@ -30,6 +31,7 @@ LEFT JOIN headquarters H
 ON T.headquarter = H.Id
 LEFT JOIN users U ON T.userId = U.Id
 WHERE DATE(T.createdAt)='$date'
+AND T.headquarter='$headquarter'
 ORDER BY id DESC";
 
 $tickets = mysqli_query($connect, $searchTickets);
