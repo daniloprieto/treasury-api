@@ -7,6 +7,8 @@ require('./connect.php');
 $JSONData = file_get_contents("php://input");
 $data = json_decode($JSONData);
 
+$id = isset($data->id) ? $data->id : null;
+$status = isset($data->status) ? $data->status : 3;
 $name = isset($data->name) ? mysqli_real_escape_string($connect, trim($data->name)) : null;
 $lastName = isset($data->lastName) ? mysqli_real_escape_string($connect, trim($data->lastName)) : null;
 $amount = isset($data->amount) ? $data->amount : 'DEFAULT';
@@ -14,11 +16,10 @@ $type = isset($data->type) ? mysqli_real_escape_string($connect, trim($data->typ
 $digital = isset($data->digital) ? mysqli_real_escape_string($connect, trim($data->digital)) : null;
 $description = isset($data->description) ? mysqli_real_escape_string($connect, trim($data->description)) : null;
 $userId = isset($data->treasurer) ? mysqli_real_escape_string($connect, trim($data->treasurer)) : null;
-$status = isset($data->status) ? mysqli_real_escape_string($connect, trim($data->status)) : 1;
 
-$sql = "
-INSERT INTO tickets(`id`, `name`, `lastName`, `headquarter`, `createdAt`, `userId`, `status`, `updatedAt`, `amount`, `type`, `description`, `digital`)
-VALUES ('DEFAULT','$name','$lastName',(SELECT U.headquarter FROM users U WHERE id=$userId),NOW(),'$userId',$status,DEFAULT,'$amount','$type','$description','$digital')";
+$sql ="
+UPDATE tickets SET `userId`=$userId,`status`=$status WHERE id=$id
+";
 
 //$create = mysqli_query($connect, $sql);
   
